@@ -83,11 +83,14 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Starta kamera-appen
+            // Starta en annan app (kamera-appen)
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivity(intent);
 
         } else if (id == R.id.nav_gallery) {
+            // Starta en activity i vår egen app
+            Intent intent = new Intent(this, GalleryActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
 
