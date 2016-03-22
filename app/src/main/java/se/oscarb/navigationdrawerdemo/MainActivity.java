@@ -6,6 +6,8 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,6 +45,24 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        /*
+            Skapa och placera ut ett första fragment
+         */
+        // 1. Skapa ett SlideshowFragment
+        HomeFragment slideshow = new HomeFragment();
+
+        // 2. Hämta FragmentManager
+        FragmentManager manager = getSupportFragmentManager();
+
+        // 3. Påbörja en FragmentTransaction
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        // 4. Vad vill vi göra? Lägg till/byt ut/ta bort fragment
+        transaction.add(R.id.content_container, slideshow);
+
+        // 5. Kör transaktionen (gör ändringen)
+        transaction.commit();
     }
 
     @Override
@@ -93,8 +114,47 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
+            // Hur byter jag ut till ett fragment?
+            // 1. Skapa ett SlideshowFragment
+            SlideshowFragment slideshow = new SlideshowFragment();
 
-        } else if (id == R.id.nav_manage) {
+            // 2. Hämta FragmentManager
+            FragmentManager manager = getSupportFragmentManager();
+
+            // 3. Påbörja en FragmentTransaction
+            FragmentTransaction transaction = manager.beginTransaction();
+
+            // 4. Vad vill vi göra? Lägg till/byt ut/ta bort fragment
+            transaction.replace(R.id.content_container, slideshow);
+
+            transaction.addToBackStack(null);
+
+            // 5. Kör transaktionen (gör ändringen)
+            transaction.commit();
+
+            // Sätt titel i App Bar till titel på menyvalet
+            getSupportActionBar().setTitle(item.getTitle());
+
+        } else if (id == R.id.nav_tools) {
+            // 1. Skapa ett ToolsFragment
+            ToolsFragment tools = new ToolsFragment();
+
+            // 2. Hämta FragmentManager
+            FragmentManager manager = getSupportFragmentManager();
+
+            // 3. Påbörja en FragmentTransaction
+            FragmentTransaction transaction = manager.beginTransaction();
+
+            // 4. Vad vill vi göra? Lägg till/byt ut/ta bort fragment
+            transaction.replace(R.id.content_container, tools);
+
+            transaction.addToBackStack(null);
+
+            // 5. Kör transaktionen (gör ändringen)
+            transaction.commit();
+
+            // Sätt titel i App Bar till titel på menyvalet
+            getSupportActionBar().setTitle(item.getTitle());
 
         } else if (id == R.id.nav_share) {
 
@@ -104,6 +164,7 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 }

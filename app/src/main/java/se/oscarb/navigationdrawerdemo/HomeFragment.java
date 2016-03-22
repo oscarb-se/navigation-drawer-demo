@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SlideshowFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
 
-    public SlideshowFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -23,8 +23,7 @@ public class SlideshowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        // container.removeAllViews(); // För att fragmenten inte ska hamna på varandra
-        return inflater.inflate(R.layout.fragment_slideshow, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
 }
